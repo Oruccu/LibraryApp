@@ -17,7 +17,7 @@
 # Auth Page
 
 <div style="display: flex; gap: 10px; align-items: center;">
-  <img src="/app/assets/PageScreen/Context.png" alt="Context Screen" style="width: 160px; height: auto;">
+  <img src="/app/assets/PageScreen/ContextNew.png" alt="Context Screen" style="width: 160px; height: auto;">
   <img src="/app/assets/PageScreen/Login.png" alt="Log In Screen" style="width: 160px; height: auto;">
   <img src="/app/assets/PageScreen/Register.png" alt="Register Screen" style="width: 160px; height: auto;">
 </div>
@@ -27,4 +27,5 @@
 
 - Yup & Formik
 - React Native Navigation (Stack Navigation)
+- Google with Sing In (Development in progress)
 
