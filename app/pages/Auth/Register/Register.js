@@ -1,4 +1,4 @@
-import { View, Text, SafeAreaView } from 'react-native'
+import { View, Text, SafeAreaView, KeyboardAvoidingView, ScrollView, Platform } from 'react-native'
 import React from 'react'
 import Input from '@/app/components/Input';
 import Button from '@/app/components/Button';
@@ -7,7 +7,7 @@ import { Formik } from 'formik';
 import ImageCard from '@/app/components/AuthScreen/ImageCard';
 import { useNavigation } from '@react-navigation/native';
 import styles from './RegisterStyles';
-import {  createUserWithEmailAndPassword } from "firebase/auth";
+import { createUserWithEmailAndPassword } from "firebase/auth";
 import { auth } from '@/firebaseConfig'
 
 export default function Register() {
@@ -63,55 +63,64 @@ export default function Register() {
 
   return (
     <SafeAreaView style={styles.container}>
-      <ImageCard />
-      <Formik
-        initialValues={initialValues}
-        onSubmit={CreateUser}
-        validationSchema={schemaRegister}>
-        {({ handleChange, handleSubmit, values, errors, touched }) => (
-          <>
-          <Input
-              placeholder="Kullanıcı Adı"
-              onChangeText={handleChange('username')}
-              value={values.username}
-            />
-            {errors.username && touched.username && (
-              <Text style={styles.message}>{errors.username}</Text>
+      <KeyboardAvoidingView
+        style={{ flex: 1 }}
+        behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
+      >
+        <ScrollView contentContainerStyle={{ flexGrow: 1 }} keyboardShouldPersistTaps="handled">
+
+
+          <ImageCard />
+          <Formik
+            initialValues={initialValues}
+            onSubmit={CreateUser}
+            validationSchema={schemaRegister}>
+            {({ handleChange, handleSubmit, values, errors, touched }) => (
+              <>
+                <Input
+                  placeholder="Kullanıcı Adı"
+                  onChangeText={handleChange('username')}
+                  value={values.username}
+                />
+                {errors.username && touched.username && (
+                  <Text style={styles.message}>{errors.username}</Text>
+                )}
+                <Input
+                  placeholder={'E-Mail'}
+                  onChangeText={handleChange('email')}
+                  value={values.email} />
+
+                {errors.email && touched.email && <Text style={styles.message}>{errors.email}</Text>}
+
+                <Input
+                  placeholder={'Şifre'}
+                  onChangeText={handleChange('password')}
+                  value={values.password}
+                  isSecure />
+                {
+                  errors.password && touched.password && <Text style={styles.message}>{errors.password}</Text>
+                }
+                <Input
+                  placeholder={'Şifre'}
+                  onChangeText={handleChange('confirmPassword')}
+                  value={values.confirmPassword}
+                  isSecure />
+                {errors.confirmPassword && touched.confirmPassword &&
+                  <Text style={styles.message}>{errors.confirmPassword}</Text>}
+
+                <Button
+                  title={'Kayıt Ol'}
+                  theme={'Primary'}
+                  onPress={handleSubmit} />
+              </>
             )}
-            <Input
-              placeholder={'E-Mail'}
-              onChangeText={handleChange('email')}
-              value={values.email} />
-
-            {errors.email && touched.email && <Text style={styles.message}>{errors.email}</Text>}
-
-            <Input
-              placeholder={'Şifre'}
-              onChangeText={handleChange('password')}
-              value={values.password}
-              isSecure />
-            {
-              errors.password && touched.password && <Text style={styles.message}>{errors.password}</Text>
-            }
-            <Input
-              placeholder={'Şifre'}
-              onChangeText={handleChange('confirmPassword')}
-              value={values.confirmPassword} 
-              isSecure/>
-            {errors.confirmPassword && touched.confirmPassword &&
-              <Text style={styles.message}>{errors.confirmPassword}</Text>}
-
-            <Button
-              title={'Kayıt Ol'}
-              theme={'Primary'}
-              onPress={handleSubmit} />
-          </>
-        )}
-      </Formik>
-      <Button
-        theme={'Secondary'}
-        title={'Giriş Yap'}
-        onPress={goLogIn} />
+          </Formik>
+          <Button
+            theme={'Secondary'}
+            title={'Giriş Yap'}
+            onPress={goLogIn} />
+        </ScrollView>
+      </KeyboardAvoidingView>
     </SafeAreaView>
   )
 }

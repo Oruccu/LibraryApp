@@ -1,4 +1,4 @@
-import { StyleSheet, Dimensions } from "react-native";
+import { StyleSheet, Dimensions , Platform } from "react-native";
 
 const Height = Dimensions.get('window').height
 const Width = Dimensions.get('window').width
@@ -8,8 +8,8 @@ export default StyleSheet.create({
         alignItems:'center',
     },
     image:{
-        height:Height/3,
-        width:300,
+        height: Platform.OS === 'ios' ? Height / 3 : Height / 4,
+        width: Platform.OS === 'ios' ? 300 : 200, 
 
     }
 })
