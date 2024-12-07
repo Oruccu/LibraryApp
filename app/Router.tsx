@@ -22,7 +22,11 @@ function Root() {
 
 function AuthStack() {
   return (
-    <Stack.Navigator>
+    <Stack.Navigator
+      screenOptions={{
+        headerShown: false,
+      }}
+    >
       <Stack.Screen name="Context" component={Context} />
       <Stack.Screen name="LogIn" component={LogIn} />
       <Stack.Screen name="Register" component={Register} />

@@ -18,7 +18,7 @@ export default {
     Primary: StyleSheet.create({
         container:{
             ...BaseStyles.container,
-            backgroundColor:Colors.primaryBlue,
+            backgroundColor:Colors.green,
         },
         title:{
             ...BaseStyles.title,
@@ -28,12 +28,12 @@ export default {
     Secondary: StyleSheet.create({
         container:{
             ...BaseStyles.container,
-            borderColor:Colors.primaryBlue,
+            borderColor:Colors.green,
             borderWidth:1
         },
         title:{
             ...BaseStyles.title,
-            color:Colors.primaryBlue,
+            color:Colors.green,
         }
     })
 }
