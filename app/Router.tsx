@@ -34,15 +34,13 @@ function AuthStack() {
   );
 }
 
-export default function App() {
+function App() {
   return (
-    <Stack.Navigator
-      screenOptions={{
-        headerShown: false,
-      }}
-    >
+    <Stack.Navigator screenOptions={{ headerShown: false}}>
       <Stack.Screen name="AuthStack" component={AuthStack} />
       <Stack.Screen name="Root" component={Root} />
     </Stack.Navigator>
   );
 }
+
+export default App;

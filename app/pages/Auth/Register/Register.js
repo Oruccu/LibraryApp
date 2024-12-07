@@ -6,15 +6,18 @@ import * as Yup from 'yup';
 import { Formik } from 'formik';
 import ImageCard from '@/app/components/AuthScreen/ImageCard';
 import { useNavigation } from '@react-navigation/native';
+import styles from './RegisterStyles';
+import {  createUserWithEmailAndPassword } from "firebase/auth";
+import { auth } from '@/firebaseConfig'
 
 export default function Register() {
   const navigation = useNavigation();
 
-  function initialValues() {
-    username = '',
-      email = '',
-      password = '',
-      confirmPassword = ''
+  const initialValues = {
+    username: '',
+    email: '',
+    password: '',
+    confirmPassword: ''
   }
 
   const schemaRegister = Yup.object({
@@ -41,18 +44,25 @@ export default function Register() {
         /^(?=.*[!@#\$%\^&\*])/,
         "Özel karakter harf içermeli"
       ),
-    confirmPassword: Yup.string().required('Zorunlualan').oneOf([Yup.ref("password"), null], "Uyumsuzşifre")
+    confirmPassword: Yup.string().required('Zorunlualan').oneOf([Yup.ref("password"), null], "Uyumsuz şifre")
   });
 
   function goLogIn() {
     navigation.navigate('LogIn')
   }
 
-  function CreateUser() {
+  const CreateUser = async (values) => {
+    try {
+      const userCredential = await createUserWithEmailAndPassword(auth, values.email, values.password);
+      console.log('Kullanıcı oluşturuldu:', userCredential);
+    } catch (error) {
+      console.error('Hata:', error.message);
+      alert(error.message); // Kullanıcıya hata mesajı göstermek için.
+    }
+  };
 
-  }
   return (
-    <SafeAreaView>
+    <SafeAreaView style={styles.container}>
       <ImageCard />
       <Formik
         initialValues={initialValues}
@@ -60,16 +70,24 @@ export default function Register() {
         validationSchema={schemaRegister}>
         {({ handleChange, handleSubmit, values, errors, touched }) => (
           <>
+          <Input
+              placeholder="Kullanıcı Adı"
+              onChangeText={handleChange('username')}
+              value={values.username}
+            />
+            {errors.username && touched.username && (
+              <Text style={styles.message}>{errors.username}</Text>
+            )}
             <Input
               placeholder={'E-Mail'}
-              onChangeText={handleChange("email")}
+              onChangeText={handleChange('email')}
               value={values.email} />
 
             {errors.email && touched.email && <Text style={styles.message}>{errors.email}</Text>}
 
             <Input
               placeholder={'Şifre'}
-              onChangeText={handleChange("password")}
+              onChangeText={handleChange('password')}
               value={values.password}
               isSecure />
             {
@@ -78,7 +96,8 @@ export default function Register() {
             <Input
               placeholder={'Şifre'}
               onChangeText={handleChange('confirmPassword')}
-              value={values.confirmPassword} />
+              value={values.confirmPassword} 
+              isSecure/>
             {errors.confirmPassword && touched.confirmPassword &&
               <Text style={styles.message}>{errors.confirmPassword}</Text>}
 
@@ -96,3 +115,5 @@ export default function Register() {
     </SafeAreaView>
   )
 }
+//   ayse@gmail.com
+//   Ayse25175!.

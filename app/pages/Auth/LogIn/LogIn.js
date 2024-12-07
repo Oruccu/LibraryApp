@@ -6,26 +6,27 @@ import * as Yup from 'yup';
 import { Formik } from 'formik';
 import ImageCard from '@/app/components/AuthScreen/ImageCard';
 import { useNavigation } from '@react-navigation/native';
-
+import styles from './LogInStyles.js'
 export default function LogIn() {
   const navigation = useNavigation();
 
-  function initialValues() {
-    email = '',
-      password = ''
+  const initialValues= {
+    email : '',
+      password : ''
   }
 
   const LoginSchema = Yup.object().shape({
     email: Yup
       .string()
-      .email('GeçersizE-Mail')
-      .required('ZorunluAlan'),
+      .email('Geçersiz E-Mail')
+      .required('Zorunlu Alan'),
     password: Yup
       .string()
-      .required('ZorunluAlan')
+      .required('Zorunlu Alan')
   });
 
-  function SingIn() {
+  function SingIn(values) {
+    console.log('G')
   }
   function goRegister() {
     navigation.navigate('Register')
@@ -55,7 +56,6 @@ export default function LogIn() {
             {
               errors.password && touched.password && <Text style={styles.message}>{errors.password}</Text>
             }
-
             <Button
               title={'Giriş Yap'}
               theme={'Primary'}
@@ -63,7 +63,6 @@ export default function LogIn() {
           </>
         )}
       </Formik>
-
       <Button
         theme={'Secondary'}
         title={'Kayıt Ol'}
