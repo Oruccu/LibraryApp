@@ -7,6 +7,9 @@ import { Formik } from 'formik';
 import ImageCard from '@/app/components/AuthScreen/ImageCard';
 import { useNavigation } from '@react-navigation/native';
 import styles from './LogInStyles.js'
+import { createUserWithEmailAndPassword, signInWithEmailAndPassword } from 'firebase/auth';
+import { auth } from '@/firebaseConfig.js';
+
 export default function LogIn() {
   const navigation = useNavigation();
 
@@ -24,13 +27,27 @@ export default function LogIn() {
       .string()
       .required('Zorunlu Alan')
   });
-
-  function SingIn(values) {
-    console.log('G')
-  }
+  
   function goRegister() {
     navigation.navigate('Register')
   }
+
+  const SingIn = async(values) =>{
+    try
+    {
+      const userCheck = await signInWithEmailAndPassword(auth, values.email, values.password)
+      console.log('Giriş ekranın içinde');
+      if(userCheck.user && userCheck.user.emailVerified){
+        navigation.navigate('Root');
+      }
+    }
+    catch(error)
+    {
+      //Buraya lottie paketinden error koy sonra da kayıt sayfasına yönlensin.
+      console.log(error)
+    }
+  }
+
 
   return (
     <SafeAreaView>

@@ -1,20 +1,30 @@
-import { Text, View } from 'react-native'
+import { SafeAreaView, Text, View } from 'react-native'
 import React, { useState } from 'react'
-import Button from '../../components/Button'
-import Input from '../../components/Input'
-
+import styles from './HomeStyles'
+import CreateButton from '@/app/components/HomeScreen/CreateButton'
 export default function Home() {
-    const [text, setText] = React.useState('');
+const CreateBook = () =>{
+
+}
     return (
-        <View>
-            <Text>Home</Text>
-            <Button onPress={() => console.log("Hello")} title={"Bas"} theme={'Primary'}/>
-            <Button onPress={() => console.log("Hello")} title={"Bas"} theme={'Secondary'}/>
-            <Input
-                placeholder={'şifre'}
-                onChangeText={setText}
-                value={text}
-            />
+        <View style={styles.container}>
+            <View style={styles.innerContainer}>
+               <Text>Carusel</Text>
+            </View>
+            <View style={styles.graphicContainer}>
+                <Text>Grafig</Text> 
+            </View>
+            <View style={styles.buttonCardContainer}>
+                <CreateButton onPress={CreateBook} buttonName={"Create Book"}/>
+            </View>
         </View>
     )
 }
+//react native expo graphic (Chart Kit)
+/* https://www.npmjs.com/package/react-native-chart-kit*/
+
+
+
+/*
+Kitabın: 
+*/

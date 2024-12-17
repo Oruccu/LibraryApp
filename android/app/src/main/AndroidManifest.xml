@@ -24,9 +24,6 @@
         <action android:name="android.intent.action.MAIN"/>
         <category android:name="android.intent.category.LAUNCHER"/>
       </intent-filter>
-    </activity>
-    <meta-data
-        android:name="com.google.android.gms.auth.api.signin.default_web_client_id"
-        android:value="379461250639-t0m3sj16hihq1rgmmbdt7a7blh2859nu.apps.googleusercontent.com" />
+    </activity>x
   </application>
 </manifest>
