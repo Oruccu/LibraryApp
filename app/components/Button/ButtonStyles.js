@@ -35,5 +35,17 @@ export default {
             ...BaseStyles.title,
             color:Colors.green,
         }
-    })
+    }),
+    Third: StyleSheet.create({
+        container:{
+            ...BaseStyles.container,
+            backgroundColor:Colors.orange,
+
+        },
+        title:{
+            ...BaseStyles.title,
+            color:Colors.offWhite,
+        }
+    }),
+
 }

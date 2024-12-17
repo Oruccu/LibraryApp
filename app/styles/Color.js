@@ -4,8 +4,9 @@ const colors = {
   lightBlue: "#d1495b", 
   green: "#6ab0ae",        
 
-  // Accent Colors
-  red: "#FFAAAA",               
+  // Button Colors
+  orange: "#EF9C66",
+  mintGreen: "#78ABA8",
   darkRed: "#FF7777", 
   lightRed: "#FFE3E3",          
 

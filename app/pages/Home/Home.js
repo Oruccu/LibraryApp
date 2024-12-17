@@ -2,29 +2,43 @@ import { SafeAreaView, Text, View } from 'react-native'
 import React, { useState } from 'react'
 import styles from './HomeStyles'
 import CreateButton from '@/app/components/HomeScreen/CreateButton'
-export default function Home() {
-const CreateBook = () =>{
+import BookModal from '@/app/components/Modals/BookModal'
+import AuthorModal from '@/app/components/Modals/AuthorModal'
 
-}
+export default function Home() {
+    const [modalBook, setModalBook] = useState(false)
+    const [modalAuthor, setModalAuthor] = useState(false)
+
     return (
         <View style={styles.container}>
             <View style={styles.innerContainer}>
-               <Text>Carusel</Text>
+                <Text>Carusel</Text>
             </View>
             <View style={styles.graphicContainer}>
-                <Text>Grafig</Text> 
+                <Text>Grafig</Text>
             </View>
             <View style={styles.buttonCardContainer}>
-                <CreateButton onPress={CreateBook} buttonName={"Create Book"}/>
+                <CreateButton 
+                    onPress={() => setModalBook(true)} 
+                    buttonName={"Create Book"} 
+                    theme={'Primary'}
+                />
+                <CreateButton 
+                    onPress={() => setModalAuthor(true)} 
+                    buttonName={"Create Author"} 
+                    theme={'Secondary'}
+                />
             </View>
+
+            {/* Modal */}
+            <BookModal 
+                visible={modalBook} 
+                onClose={() => setModalBook(false)} 
+            />
+            <AuthorModal 
+                visible={modalAuthor} 
+                onClose={() => setModalAuthor(false)} 
+            />
         </View>
     )
 }
-//react native expo graphic (Chart Kit)
-/* https://www.npmjs.com/package/react-native-chart-kit*/
-
-
-
-/*
-Kitabın: 
-*/
